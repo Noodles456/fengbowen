@@ -1,10 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Noodles社区</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/Noodles.css">
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <script src="/js/Noodles.js" type="application/javascript"></script>
+
+
 </head>
 <body>
-$END$
+<div th:insert="~{nav :: nav}"></div>
+<div class="container-fluid main">
+    <div class="row">
+
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" >
+            <div class="jumbotron">
+                <h1>出错了!</h1>
+                <p th:text="${messages}">请稍后重试</p>
+                <p><a class="btn btn-primary btn-lg" href="/" role="button">返回首页</a></p>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
