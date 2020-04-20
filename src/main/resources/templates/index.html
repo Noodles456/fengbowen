@@ -34,6 +34,7 @@ window.onload=function () {
               <li><a th:href="@{'/zero'}"><span>消灭零回复</span></a></li>
           </ul>
             <hr>
+        <div  th:if="${pagList.data}!=null">
             <div class="media" th:each="question:${pagList.data}">
                 <div class="media-left">
                     <a href="#">
@@ -57,6 +58,7 @@ window.onload=function () {
                     </span>
                 </div>
             </div>
+        </div>
             <nav aria-label="Page navigation" th:if="${pagList.page!=0}">
                 <ul class="pagination">
                     <li th:if="${pagList.showFirstPage}">
