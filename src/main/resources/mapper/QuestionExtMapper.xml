@@ -55,5 +55,9 @@
         </where>
  order by gmt_create desc limit #{page},#{size}
     </select>
-
+<select id="queryQuestionComZero" resultType="question" parameterType="java.lang.Integer">
+select * from question
+where comment_count=0
+ order by gmt_create desc limit #{page},#{size}
+</select>
 </mapper>

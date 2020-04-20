@@ -1,6 +1,8 @@
 package com.fbw.OneBoot.service;
 
 import com.fbw.OneBoot.dto.CommentDTO;
+import com.fbw.OneBoot.enums.NotificationEnum;
+import com.fbw.OneBoot.enums.NotificationStatusEnum;
 import com.fbw.OneBoot.enums.TypeEnum;
 import com.fbw.OneBoot.exception.CustomizeException;
 import com.fbw.OneBoot.exception.ErrorCodeImpl;
@@ -29,8 +31,10 @@ public class CommentService {
     private UserMapper userMapper;
     @Autowired
     private CommentEtxMapper commentEtxMapper;
+   @Autowired
+   private NotificationMapper notificationMapper;
     @Transactional
-    public void insert(Comment comment) {
+    public void insert(Comment comment, User commentor) {
     if(comment.getParentId()==null||comment.getParentId()==0){
         throw new CustomizeException(ErrorCodeImpl.TARGET_PARAM_NOT_FOUND);
     }
@@ -42,12 +46,17 @@ public class CommentService {
         if(dbComment==null){
             throw new CustomizeException(ErrorCodeImpl.COMMENT_NOT_FOUND);
         }
+        Question question = questionMapper.selectByPrimaryKey(dbComment.getParentId());
+        if(question==null){
+            throw new CustomizeException(ErrorCodeImpl.QUESTION_NOT_FOUND);
+        }
         commentMapper.insert(comment);
         Comment parComment=new Comment();
-        parComment.setParentId(comment.getParentId());
+        parComment.setId(comment.getParentId());
         parComment.setCommentCount(1);
-        System.out.println(parComment.getCommentCount());
         commentEtxMapper.commentCount(parComment);
+createNotify(comment,dbComment.getCommentator(),commentor.getName(), question.getTitle(), NotificationEnum.REPLY_COMMENT,question.getId());
+
     }else{
         Question question = questionMapper.selectByPrimaryKey(comment.getParentId());
    if(question==null){
@@ -57,9 +66,25 @@ public class CommentService {
    commentMapper.insert(comment);
    question.setCommentCount(1);
    questionExtMapper.commentCount(question);
+createNotify(comment,question.getCreator(),commentor.getName(),question.getTitle(), NotificationEnum.REPLY_QUESTION,question.getId());
     }
     }
+private  void  createNotify(Comment comment, Long receiver, String notifyName, String outerTitle, NotificationEnum notificationEnum,Long outId){
+    if(receiver==comment.getCommentator()){
+        return;
+    }
+        Notification notification=new Notification();
+    notification.setGmtCreate(System.currentTimeMillis());
+    notification.setType(notificationEnum.getType());
 
+    notification.setOutid(outId);
+    notification.setNotifier(comment.getCommentator());
+    notification.setStatus(NotificationStatusEnum.UNREAD.getStatus());
+    notification.setReceiver(receiver);
+    notification.setNotifierName(notifyName);
+    notification.setOuterTitle(outerTitle);
+    notificationMapper.insert(notification);
+    }
     public List<CommentDTO> queryById(long id, TypeEnum type) {
         CommentExample commentExampl=new CommentExample();
         commentExampl.createCriteria().andParentIdEqualTo(id)

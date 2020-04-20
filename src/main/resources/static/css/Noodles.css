@@ -1,0 +1,87 @@
+body{
+
+    background-color: gainsboro;
+}
+.main{
+    margin: 30px;
+ background-color: white;
+
+}
+.btn-publish{
+    float: right;
+    margin-bottom : 15px;
+}
+.media-object{
+    width: 35px;
+    height: 35px;
+}
+.media-body{
+  padding: 10px;
+}
+.desc{
+    font-size: 12px;
+    font-weight: normal;
+    color: #999;
+}
+.profile.section{
+    margin-top: 15px;
+}
+.noodles-menu{
+    color: #999;
+}
+.comment{
+    margin: 10px 0;
+}
+.comment-btn{
+    float: right;
+    margin-bottom: 10px;
+}
+.menu{
+color: #999;
+    margin-top: 5px;
+}
+.icon{
+    margin-right: 10px;
+    font-size: 15px;
+    cursor: pointer;
+}
+.icon.active{
+    color: #499ef3;
+}
+.icon:hover {
+color: #499ef3;
+}
+.sub-comments{
+    border-radius: 5px;
+    margin-top: 10px;
+    border: 1px solid #eee;
+    padding-top: 15px;
+    margin-bottom: 15px;
+}
+.related-ul{
+    margin-left: -35px;
+    list-style: none;
+    line-height: 15px;
+}
+.related-a:hover {text-decoration: none;}
+.img{
+    width: 80%;
+    height: 250px;
+}
+.publish-tag-tab{
+    display: none;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+.label-Info{
+    white-space: normal;
+    margin: 5px 5px;
+    display: inline-block;
+}
+.footer{
+    padding: 10px 27%;
+    color: black;
+}
+.tabs{
+    margin-top: -31px;
+}

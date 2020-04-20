@@ -1,4 +1,6 @@
 package com.fbw.OneBoot.exception;
 
-public class ErrorCode {
+public interface ErrorCode {
+String getMessage();
+Integer getCode();
 }

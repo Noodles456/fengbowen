@@ -1,29 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration
-        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-config.dtd">
-<!--通过这个配置文件，完成mybatis与数据库的连接  -->
-<configuration>
-    <environments default="development">
-        <environment id="development">
-            <!-- 配置事务管理 ，采用JDBC管理事务-->
-            <transactionManager type="JDBC"/>
-            <!-- POOLED是mybatis的 数据源 -->
-            <!-- JNDI是基于tomcat的数据源 -->
-            <dataSource type="POOLED">
-                <property name="driver" value=""/>
-                <property name="url" value=""/>
-                <property name="username" value=""/>
-                <property name="password" value=""/>
-            </dataSource>
-        </environment>
-    </environments>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
 
 
-    <!-- pojo的映射文件UserMapper引入到配入到配置文件中 -->
-    <mappers>
-        <!-- resource要写成路径 -->
-        <mapper resource=""/>
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/fbw"
+                        userId="root"
+                        password="root">
+        </jdbcConnection>
 
-    </mappers>
-</configuration>
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.fbw.OneBoot.model" targetProject="src\main\java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mapper"  targetProject="src\main\resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.fbw.OneBoot.mapper"  targetProject="src\main\java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <table  tableName="user" domainObjectName="User" >
+        </table>
+        <table  tableName="question" domainObjectName="Question" >
+        </table>
+        <table tableName="comment" domainObjectName="Comment"></table>
+        <table tableName="notification" domainObjectName="Notification"></table>
+    </context>
+</generatorConfiguration>

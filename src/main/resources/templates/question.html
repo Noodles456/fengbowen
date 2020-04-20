@@ -1,10 +1,172 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title th:text="${question.title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/Noodles.css">
+    <link rel="stylesheet" href="/css/editormd.min.css">
+    <link rel="stylesheet" href="/css/editormd.preview.min.css">
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <script src="/js/Noodles.js" type="application/javascript"></script>
+    <script src="/js/moment.js" type="application/javascript"></script>
+    <script src="/js/editormd.min.js" type="application/javascript"></script>
+    <script src="/js/lib/marked.min.js"></script>
+    <script src="/js/lib/prettify.min.js"></script>
+
+
+
+
 </head>
 <body>
-$END$
+<div th:insert="~{nav :: nav}"></div>
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h4><span class="glyphicon glyphicon-list" aria-hidden="true" th:text="${question.title}" style="margin-top: 24px"></span></h4>
+                <span class="desc">
+
+                作者:<span th:text="${question.user.name}"></span>|
+                发布时间:<span th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span>|
+                       阅读数: <span th:text="${question.viewCount}"></span>
+                    </span>
+                <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="question-view">
+                    <textarea style="display:none;" th:text="${question.description}"></textarea>
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        editormd.markdownToHTML("question-view", {});
+                    });
+                </script>
+                <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                <a th:href="@{'/publish/'+${question.id}}" class="noodles-menu"
+                   th:if="${session.user!=null && session.user.id==question.creator}">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true">编辑</span></a>
+                <span class="label label-success" style="margin: 0px 1px" th:each="tag :${question.tag.split(',')}">
+
+                    <span class="glyphicon glyphicon-tag"   th:text="${tag}"></span>
+
+                </span>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h4>
+                <span th:text="${question.commentCount}"></span>个回复
+            </h4>
+
+            <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 0">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:each="comment:${comments}">
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object img-rounded" th:src="${comment.user.avatarUrl}">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h5 class="media-heading">
+                            <span th:text="${comment.user.name}"></span>
+                        </h5>
+
+                        <div th:text="${comment.content}">
+
+                        </div>
+
+                        <div class="menu">
+                            <span  class="glyphicon glyphicon-thumbs-up icon"></span>
+                            <span  class="glyphicon glyphicon-thumbs-down icon"></span>
+                            <span >
+                                <span class="glyphicon glyphicon-comment icon"  th:data-id="${comment.id}" onclick="CollapseComment(this)">
+                                </span>
+                                <span th:text="${comment.commentCount}">
+                                </span>
+                            </span>
+
+                            <span class="pull-right" th:text="${#dates.format(comment.gmtCreate,'yyyy-MM-dd HH:mm')}">
+                            </span>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 collapse sub-comments"
+                        th:id="${'comment-'+comment.id}">
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" placeholder="评论一下..." th:id="${'input-'+comment.id}" >
+                                <button type="button" class="btn btn-success comment-btn pull-right" onclick="comment2(this)" th:data-id="${comment.id}" style="margin: 10px 0">
+                                    评论</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+            <h4>
+                回复问题:
+            </h4>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: -20px">
+
+                <hr  class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="comment_section">
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object img-rounded" th:src="${session.user!=null ? session.user.avatarUrl:'/images/def.png'}">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h5 class="media-heading">
+                            <span th:text="${session.user!=null ? session.user.name:'匿名用户'}"></span>
+                        </h5>
+                    </div>
+                </div>
+                <input type="hidden" id="question_id" th:value="${question.id}" />
+                <textarea class="form-control comment" rows="6" id="comment_content"></textarea>
+                <button type="button" class="btn btn-success comment-btn" onclick="post()">回复</button>
+            </div>
+        </div>
+    </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h4>发起人</h4>
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object img-rounded" th:src="${question.user.avatarUrl}">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h5 class="media-heading">
+                            <span th:text="${question.user.name}"></span>
+                        </h5>
+
+                    </div>
+                </div>
+
+            </div>
+            <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h4>相关问题</h4>
+                <span  class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:each="related:${relatedQuestions}">
+                    <ul class="related-ul">
+
+                        <li><a class="related-a" th:text="${related.title}" th:href="@{'/question/'+${related.id}}">
+                        </a></li>
+                    </ul>
+                </span>
+                </span>
+            </div>
+            <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h4>推荐内容</h4>
+                <img src="/images/wx.jpg" class="img-thumbnail img" >
+            </div>
+            </div>
+    </div>
+</div>
+<div th:insert="~{footer :: foot}"></div>
 </body>
 </html>
