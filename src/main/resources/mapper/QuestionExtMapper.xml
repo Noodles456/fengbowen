@@ -35,10 +35,10 @@
     where id=#{id}
     </update>
     <select id="selectRelated" parameterType="question" resultMap="BaseResultMap">
-    select * from QUESTION where id != #{id} and tag regexp #{tag}
+    select * from question where id != #{id} and tag regexp #{tag}
     </select>
     <select id="countBySearch" parameterType="com.fbw.OneBoot.dto.SearchDTO" resultType="java.lang.Integer">
-    select count(*) from QUESTION
+    select count(*) from question
         <where>
             <if test="search != null and search != ''">
                 and  title regexp #{search}
@@ -47,7 +47,7 @@
 
     </select>
     <select id="selectBySearch" parameterType="com.fbw.OneBoot.dto.SearchDTO" resultMap="BaseResultMap">
-        select * from QUESTION
+        select * from question
         <where>
             <if test="search != null and search != '' ">
                 and  title regexp #{search}
