@@ -29,17 +29,17 @@ public class HelloController {
        model.addAttribute("search",search);
        return "index";
     }
-    @GetMapping("/{action}")
-    public String zeroComment(
-            Model model,
-   @PathVariable(name = "action") String action,
-            @RequestParam(name = "page",defaultValue = "1") Integer page,
-            @RequestParam(name = "size",defaultValue = "5") Integer size){
-if(action.equals("zero")) {
-    PagDTO pagList = questionService.queryByComment(page, size);
-    model.addAttribute("pagList", pagList);
-    return "index";
-}
-return "index";
-}
+//    @GetMapping("/{action}")
+//    public String zeroComment(
+//            Model model,
+//   @PathVariable(name = "action") String action,
+//            @RequestParam(name = "page",defaultValue = "1") Integer page,
+//            @RequestParam(name = "size",defaultValue = "5") Integer size){
+//if(action.equals("zero")) {
+//    PagDTO pagList = questionService.queryByComment(page, size);
+//    model.addAttribute("pagList", pagList);
+//    return "index";
+//}
+//return "index";
+//}
 }

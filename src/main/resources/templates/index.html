@@ -27,12 +27,12 @@ window.onload=function () {
     <div class="row">
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" >
             <h3><span class="glyphicon glyphicon-list" aria-hidden="true"></span>发现</h3>
-          <ul class="nav nav-tabs aw-nav-tabs active hidden-xs pull-right tabs">
-              <li><a><span>最新</span></a></li>
-              <li><a><span>最热</span></a></li>
-              <li><a><span>推荐</span></a></li>
-              <li><a th:href="@{'/zero'}"><span>消灭零回复</span></a></li>
-          </ul>
+          <!--<ul class="nav nav-tabs aw-nav-tabs active hidden-xs pull-right tabs">-->
+              <!--<li><a><span>最新</span></a></li>-->
+              <!--<li><a><span>最热</span></a></li>-->
+              <!--<li><a><span>推荐</span></a></li>-->
+              <!--<li><a th:href="@{'/zero'}"><span>消灭零回复</span></a></li>-->
+          <!--</ul>-->
             <hr>
 
             <div class="media" th:each="question:${pagList.data}">
