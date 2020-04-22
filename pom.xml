@@ -18,7 +18,16 @@
 		<java.version>1.8</java.version>
 
 	</properties>
-
+<profiles>
+	<profile>
+		<id>dev</id>
+		<properties>
+			<db.url>jdbc:mysql://locahost:3306/fbw</db.url>
+			<db.user>root</db.user>
+			<db.password>root</db.password>
+		</properties>
+	</profile>
+</profiles>
 	<dependencies>
 		<dependency>
 			<groupId>cn.ucloud.ufile</groupId>
@@ -97,9 +106,14 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
-				<groupId>org.mybatis.generator</groupId>
-				<artifactId>mybatis-generator-maven-plugin</artifactId>
-				<version>1.3.7</version>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>5.2.4</version>
+				<configuration>
+					<url>${db.url}</url>
+					<user>${db.user}</user>
+					<password>${db.password}</password>
+				</configuration>
 			<dependencies>
 				<dependency>
 					<groupId>mysql</groupId>
@@ -108,7 +122,11 @@
 				</dependency>
 			</dependencies>
 			</plugin>
-
+			<plugin>
+			<groupId>org.mybatis.generator</groupId>
+			<artifactId>mybatis-generator-maven-plugin</artifactId>
+			<version>1.3.7</version>
+			</plugin>
 		</plugins>
 	</build>
 
