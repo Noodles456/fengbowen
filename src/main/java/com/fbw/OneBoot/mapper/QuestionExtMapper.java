@@ -17,5 +17,5 @@ public interface QuestionExtMapper {
 
     List<Question> selectBySearch(SearchDTO searchDTO);
 
-    List<Question> queryQuestionComZero(@Param("page") Integer page, @Param("size")Integer size);
+
 }

@@ -43,6 +43,9 @@
             <if test="search != null and search != ''">
                 and  title regexp #{search}
             </if>
+         <if test="zero != null and zero != ''">
+             and comment_count regexp #{zero}
+         </if>
         </where>
 
     </select>
@@ -52,12 +55,11 @@
             <if test="search != null and search != '' ">
                 and  title regexp #{search}
             </if>
+            <if test="zero != null and zero != ''">
+                and comment_count regexp #{zero}
+            </if>
         </where>
  order by gmt_create desc limit #{page},#{size}
     </select>
-<select id="queryQuestionComZero" resultType="question" parameterType="java.lang.Integer">
-select * from question
-where comment_count=0
- order by gmt_create desc limit #{page},#{size}
-</select>
+
 </mapper>

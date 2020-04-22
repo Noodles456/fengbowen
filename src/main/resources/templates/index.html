@@ -27,12 +27,13 @@ window.onload=function () {
     <div class="row">
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" >
             <h3><span class="glyphicon glyphicon-list" aria-hidden="true"></span>发现</h3>
-          <!--<ul class="nav nav-tabs aw-nav-tabs active hidden-xs pull-right tabs">-->
-              <!--<li><a><span>最新</span></a></li>-->
-              <!--<li><a><span>最热</span></a></li>-->
-              <!--<li><a><span>推荐</span></a></li>-->
-              <!--<li><a th:href="@{'/zero'}"><span>消灭零回复</span></a></li>-->
-          <!--</ul>-->
+       <ul class="nav nav-tabs aw-nav-tabs active hidden-xs pull-right tabs">
+              <li><a><span>最新</span></a></li>
+              <li><a><span>最热</span></a></li>
+              <li><a><span>推荐</span></a></li>
+            <li><a th:href="@{/(zero=0)}"><span style="color: #E51C37">消灭零回复</span></a></li>
+          </ul>
+
             <hr>
 
             <div class="media" th:each="question:${pagList.data}">
@@ -62,25 +63,25 @@ window.onload=function () {
             <nav aria-label="Page navigation" th:if="${pagList.page!=0}">
                 <ul class="pagination">
                     <li th:if="${pagList.showFirstPage}">
-                        <a th:href="@{/(page=${1},size=${pagList.size},search=${search})}" aria-label="Previous">
+                        <a th:href="@{/(page=${1},size=${pagList.size},search=${search},zero=${zero})}" aria-label="Previous">
                             <span aria-hidden="true">&lt;&lt;</span>
                         </a>
                     </li>
                     <li th:if="${pagList.showPre}">
-                        <a th:href="@{/(page=${pagList.page -1},size=${pagList.size},search=${search})}"aria-label="Previous">
+                        <a th:href="@{/(page=${pagList.page -1},size=${pagList.size},search=${search},zero=${zero})}"aria-label="Previous">
                             <span aria-hidden="true">&lt;</span>
                         </a>
                     </li>
 
-                    <li th:each="page:${pagList.pages}" th:class="${pagList.page==page}? 'active':''"><a th:href="@{/(page=${page},size=${pagList.size},search=${search})}" th:text="${page}"></a></li>
+                    <li th:each="page:${pagList.pages}" th:class="${pagList.page==page}? 'active':''"><a th:href="@{/(page=${page},size=${pagList.size},search=${search},zero=${zero})}" th:text="${page}"></a></li>
 
                     <li th:if="${pagList.showNextPage}">
-                        <a th:href="@{/(page=${pagList.page+1},size=${pagList.size},search=${search})}" aria-label="Previous">
+                        <a th:href="@{/(page=${pagList.page+1},size=${pagList.size},search=${search},zero=${zero})}" aria-label="Previous">
                             <span aria-hidden="true">&gt;</span>
                         </a>
                     </li>
                     <li th:if="${pagList.showEndPage}">
-                        <a th:href="@{/(page=${pagList.totalPage},size=${pagList.size},search=${search})}" aria-label="Next">
+                        <a th:href="@{/(page=${pagList.totalPage},size=${pagList.size},search=${search},zero=${zero})}" aria-label="Next">
                             <span aria-hidden="true">&gt;&gt;</span>
                         </a>
                     </li>
@@ -94,11 +95,11 @@ window.onload=function () {
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a th:href="@{/(page=${pagList.page},size=${1},search=${search})}" >1</a></li>
-                    <li><a th:href="@{/(page=${pagList.page},size=${2},search=${search})}">2</a></li>
-                    <li><a th:href="@{/(page=${pagList.page},size=${3},search=${search})}">3</a></li>
+                    <li><a th:href="@{/(page=${pagList.page},size=${1},search=${search},zero=${zero})}" >1</a></li>
+                    <li><a th:href="@{/(page=${pagList.page},size=${2},search=${search},zero=${zero})}">2</a></li>
+                    <li><a th:href="@{/(page=${pagList.page},size=${3},search=${search},zero=${zero})}">3</a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a th:href="@{/(page=${pagList.page},size=${5},search=${search})}">5</a></li>
+                    <li><a th:href="@{/(page=${pagList.page},size=${5},search=${search},zero=${zero})}">5</a></li>
                 </ul>
             </div>
         </div>
