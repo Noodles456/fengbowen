@@ -32,14 +32,14 @@ public class HelloController {
             @RequestParam(name = "hot",required = false) String hot) {
 
 
-          PagDTO pagList = questionService.queryQuestion(search,zero,hot,page, size);
-      Integer countHot = questionService.countByHot(hot);
+          PagDTO pagList = questionService.queryQuestion(search,zero,hot,page,size);
+
       List<String> hots = questionCache.getHots();
       model.addAttribute("pagList", pagList);
             model.addAttribute("search", search);
             model.addAttribute("zero",zero);
             model.addAttribute("hots",hots);
-            model.addAttribute("countHot",countHot);
+
             return "index";
 
     }

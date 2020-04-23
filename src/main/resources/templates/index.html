@@ -114,13 +114,7 @@ window.onload=function () {
                             <img src="/images/hot2.jpg" />
                             <a class="related-a hot" th:text="${hot}" th:href="@{/(page=${pagList.page},size=${pagList.size},search=${search},zero=${zero},hot=${hot})}">
                         </a></li>
-                        <li>
-                            <p>
-                                <span style="color: #999"><span th:text="${countHot}" ></span>
-                                个问题
-                                </span>
-                            </p>
-                        </li>
+
                     </ul>
                 </span>
                 </span>

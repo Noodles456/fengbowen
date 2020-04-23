@@ -52,10 +52,7 @@
         </where>
 
     </select>
-    <select id="countByHot" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-        select count(*) from question
-            where tag =#{hot}
-    </select>
+
     <select id="selectBySearch" parameterType="com.fbw.OneBoot.dto.SearchDTO" resultMap="BaseResultMap">
         select * from question
         <where>
