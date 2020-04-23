@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class SearchDTO {
+    private String hot;
     private String  zero;
     private String search;
     private Integer page;

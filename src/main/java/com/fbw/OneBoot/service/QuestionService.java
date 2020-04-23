@@ -33,16 +33,21 @@ public class QuestionService {
     private UserMapper userMapper;
 
 
-    public PagDTO queryQuestion(String search,String zero,Integer page, Integer size) {
+    public PagDTO queryQuestion(String search,String zero,String hot,Integer page, Integer size) {
         if(StringUtils.isNotBlank(search)){
             String [] tags=StringUtils.split(search,",");
             search= Arrays.stream(tags).collect(Collectors.joining("|"));
+        }
+        if(StringUtils.isNotBlank(hot)){
+            String [] tags=StringUtils.split(hot,",");
+            hot= Arrays.stream(tags).collect(Collectors.joining("|"));
         }
 
         PagDTO<QuestionDTO> pagDTO = new PagDTO<>();
         SearchDTO searchDTO =new SearchDTO();
         searchDTO.setSearch(search);
         searchDTO.setZero(zero);
+        searchDTO.setHot(hot);
         Integer totalCount = questionExtMapper.countBySearch(searchDTO);
         pagDTO.setPagInation(totalCount,page,size);
         if(page<1){
