@@ -30,8 +30,8 @@ window.onload=function () {
        <ul class="nav nav-tabs aw-nav-tabs active hidden-xs pull-right tabs">
               <li><a><span>最新</span></a></li>
               <li><a><span>最热</span></a></li>
-              <li><a><span>推荐</span></a></li>
-            <li><a th:href="@{/(zero=0)}"><span style="color: #E51C37">消灭零回复</span></a></li>
+              <li><a ><span>推荐</span></a></li>
+            <li th:class="${zero!=null&&zero!=''}? 'active':''"><a th:href="@{/(page=${pagList.page},size=${pagList.size},search=${search},zero=0)}"><span style="color: #E51C37">消灭零回复</span></a></li>
           </ul>
 
             <hr>
@@ -112,7 +112,7 @@ window.onload=function () {
                     <ul class="related-ul">
                         <li>
                             <img src="/images/hot2.jpg" />
-                            <a class="related-a hot" th:text="${hot}" th:href="@{/(page=${pagList.page},size=${pagList.size},search=${search},zero=${zero},hot=${hot})}">
+                            <a class="related-a hot" th:text="${hot}" th:href="@{/(page=${pagList.page},size=${pagList.size},search=${search},hot=${hot})}">
                         </a></li>
 
                     </ul>
