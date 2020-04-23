@@ -22,7 +22,7 @@ public class HotQuestion {
 private QuestionMapper questionMapper;
 @Autowired
 private HotQuestionCache hotQuestionCache;
-@Scheduled(fixedRate = 10000)
+@Scheduled(fixedRate = 1000 * 60 * 60 * 3)
 public  void hotQuestionSchedule(){
     int offsize=0;
     int limit=20;
