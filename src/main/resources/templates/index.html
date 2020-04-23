@@ -108,9 +108,19 @@ window.onload=function () {
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h4>热门话题</h4>
                 <span  class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:each="hot:${hots}">
+
                     <ul class="related-ul">
-                        <li><a class="related-a" th:text="${hot}" th:href="@{/(page=${pagList.page},size=${pagList.size},search=${search},zero=${zero},hot=${hot})}">
+                        <li>
+                            <img src="/images/hot2.jpg" />
+                            <a class="related-a hot" th:text="${hot}" th:href="@{/(page=${pagList.page},size=${pagList.size},search=${search},zero=${zero},hot=${hot})}">
                         </a></li>
+                        <li>
+                            <p>
+                                <span style="color: #999"><span th:text="${countHot}" ></span>
+                                个问题
+                                </span>
+                            </p>
+                        </li>
                     </ul>
                 </span>
                 </span>

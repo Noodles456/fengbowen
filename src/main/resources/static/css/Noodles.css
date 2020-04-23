@@ -7,6 +7,16 @@ body{
  background-color: white;
 
 }
+.hot{
+    display: inline-block;
+    height: 20px;
+    line-height: 16px;
+    padding: 2px 5px;
+    background-color: #99cfff;
+    font-size: 12px;
+    color: #fff;
+    border-radius: 4px;
+}
 .btn-publish{
     float: right;
     margin-bottom : 15px;

@@ -192,4 +192,8 @@ public class QuestionService {
     }
 
 
+    public Integer countByHot(String hot) {
+ Integer  countHot  =questionExtMapper.countByHot(hot);
+ return countHot;
+    }
 }

@@ -18,4 +18,5 @@ public interface QuestionExtMapper {
     List<Question> selectBySearch(SearchDTO searchDTO);
 
 
+    Integer countByHot(@Param("hot") String hot);
 }
