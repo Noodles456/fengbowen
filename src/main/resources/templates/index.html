@@ -28,10 +28,9 @@ window.onload=function () {
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" >
             <h3><span class="glyphicon glyphicon-list" aria-hidden="true"></span>发现</h3>
        <ul class="nav nav-tabs aw-nav-tabs active hidden-xs pull-right tabs">
-              <li><a><span>最新</span></a></li>
-              <li><a><span>最热</span></a></li>
-              <li><a ><span>推荐</span></a></li>
-            <li th:class="${zero!=null&&zero!=''}? 'active':''"><a th:href="@{/(page=${pagList.page},size=${pagList.size},search=${search},zero=0)}"><span style="color: #E51C37">消灭零回复</span></a></li>
+              <li th:class="${zero=='new'}? 'active':''"><a th:href="@{/(page=${pagList.page},size=${pagList.size},search=${search},zero='new')}"><span>推荐</span></a></li>
+              <li th:class="${zero=='hot'}? 'active':''"><a th:href="@{/(page=${pagList.page},size=${pagList.size},search=${search},zero='hot')}"><span>最热</span></a></li>
+            <li th:class="${zero=='no'}? 'active':''"><a th:href="@{/(page=${pagList.page},size=${pagList.size},search=${search},zero='no')}"><span style="color: #E51C37">消灭零回复</span></a></li>
           </ul>
 
             <hr>
@@ -49,8 +48,6 @@ window.onload=function () {
                        <a th:href="@{'/question/'+${question.id}}" th:text="${question.title}">
                        </a>
                    </h4>
-                    <span th:text="${question.description}">
-                    </span>
                     <span class="desc" >
                         <span th:text="${question.commentCount}"></span>个回复 .
                         <span th:text="${question.viewCount}"></span>次浏览 .

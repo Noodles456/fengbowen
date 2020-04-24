@@ -43,9 +43,13 @@
             <if test="search != null and search != ''">
                 and  title regexp #{search}
             </if>
-         <if test="zero != null and zero != ''">
-             and comment_count regexp #{zero}
+         <if test="zero != null and zero != '' and zero=='no'">
+             and comment_count=0
          </if>
+            <if test="zero != null and zero != '' and zero=='new'">
+                and view_count >= 10
+            </if>
+
             <if test="hot != null and hot != ''">
                 and tag regexp #{hot}
             </if>
@@ -59,14 +63,30 @@
             <if test="search != null and search != '' ">
                 and  title regexp #{search}
             </if>
-            <if test="zero != null and zero != ''">
-                and comment_count regexp #{zero}
+            <if test="zero != null and zero != '' and zero=='no'">
+                and comment_count=0
             </if>
+            <if test="zero != null and zero != '' and zero=='new'">
+                and  view_count >= 10
+            </if>
+
             <if test="hot != null and hot != ''">
                 and tag regexp #{hot}
             </if>
         </where>
- order by gmt_create desc limit #{page},#{size}
+        <if test="zero == null or zero == ''">
+            order by gmt_create desc
+        </if>
+        <if test="zero != null and zero != '' and zero == 'new'">
+            order by gmt_create desc
+        </if>
+        <if test="zero != null and zero != '' and zero == 'no'">
+            order by gmt_create desc
+        </if>
+        <if test="zero != null and zero != '' and zero == 'hot' ">
+            order by comment_count desc
+        </if>
+      limit #{page},#{size}
     </select>
 
 </mapper>
