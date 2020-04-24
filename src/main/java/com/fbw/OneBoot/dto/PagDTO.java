@@ -72,13 +72,13 @@ public class PagDTO<T> {
         else{
             showNextPage=true;
         }
-        if(page>=1&&page<3){
+        if(page<=3){
             showFirstPage=false;
         }
         else{
             showFirstPage=true;
         }
-        if(page==totalPage){
+        if(page>=totalPage-1){
             showEndPage=false;
         }
         else{
