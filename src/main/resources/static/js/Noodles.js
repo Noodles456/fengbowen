@@ -118,14 +118,6 @@ var value=e.getAttribute("data-tag");
 function showTag() {
     $("#show-tag").show();
 }
-function commentLike(e) {
-    var id= e.getAttribute("data-id");
-    var qid= e.getAttribute("data-qid");
-    var uid= e.getAttribute("data-uid");
-    likeCount(id,qid,uid);
-
-}
-
 function likeCount(id,qid,uid) {
     $.ajax({
         type: "POST",
@@ -154,3 +146,10 @@ function likeCount(id,qid,uid) {
         dataType: "json"
     });
     }
+function commentLike(e) {
+    var id= e.getAttribute("data-id");
+    var qid= e.getAttribute("data-qid");
+    var uid= e.getAttribute("data-uid");
+    likeCount(id,qid,uid);
+
+}
