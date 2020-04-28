@@ -2,6 +2,7 @@ package com.fbw.OneBoot.controller;
 
 import com.fbw.OneBoot.dto.CommentCreateDTO;
 import com.fbw.OneBoot.dto.CommentDTO;
+import com.fbw.OneBoot.dto.LikeCountDTO;
 import com.fbw.OneBoot.dto.ResultDTO;
 import com.fbw.OneBoot.enums.TypeEnum;
 import com.fbw.OneBoot.exception.ErrorCodeImpl;
@@ -50,4 +51,24 @@ public ResultDTO comments(@PathVariable(name = "id") Long id){
        List<CommentDTO>  commentDTOS= commentService.queryById(id, TypeEnum.COMMENT);
         return ResultDTO.okOf(commentDTOS);
 }
+
+@ResponseBody
+@RequestMapping(value = "/like",method = RequestMethod.POST)
+    public Object likeCount(@RequestBody LikeCountDTO likeCountDTO,
+                            HttpServletRequest request){
+
+    User user=(User) request.getSession().getAttribute("user");
+    if(user==null){
+        return ResultDTO.errorOf(ErrorCodeImpl.NO_LOG);
+    }
+    Long id=likeCountDTO.getId();
+    Long qid=likeCountDTO.getQid();
+    Long uid=likeCountDTO.getUid();
+    boolean bol = commentService.likeCount(id, qid, uid);
+if(bol){
+    return ResultDTO.okOf();
+}
+    return ResultDTO.errorOf(ErrorCodeImpl.LIKE_FALSE);
+    }
+
 }

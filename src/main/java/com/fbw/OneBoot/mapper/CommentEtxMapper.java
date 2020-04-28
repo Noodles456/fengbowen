@@ -10,4 +10,6 @@ import java.util.List;
 
 public interface CommentEtxMapper {
     int commentCount(Comment comment);
+
+    void likeCountComment(Comment comment);
 }

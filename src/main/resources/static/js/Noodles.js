@@ -118,3 +118,39 @@ var value=e.getAttribute("data-tag");
 function showTag() {
     $("#show-tag").show();
 }
+function commentLike(e) {
+    var id= e.getAttribute("data-id");
+    var qid= e.getAttribute("data-qid");
+    var uid= e.getAttribute("data-uid");
+    likeCount(id,qid,uid);
+
+}
+
+function likeCount(id,qid,uid) {
+    $.ajax({
+        type: "POST",
+        url: "/like",
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "id": id,
+            "qid": qid,
+            "uid": uid,
+        }),
+        success: function (response) {
+            if (response.code == 200) {
+                window.location.reload();
+            } else {
+                if (response.code == 2003) {
+                    var isAccepted = confirm(response.messages);
+                    if (isAccepted) {
+                        window.open("https://github.com/login/oauth/authorize?client_id=e09b85fc072325b7067f&redirect_uri=" + document.location.origin + "/callback&scope=user&state=1");
+                        window.localStorage.setItem("closable", true);
+                    }
+                } if(response.code == 2011) {
+                    alert(response.messages);
+                }
+            }
+        },
+        dataType: "json"
+    });
+    }

@@ -111,4 +111,14 @@ private  void  createNotify(Comment comment, Long receiver, String notifyName, S
 
         return commentDTOList;
     }
+
+    public boolean likeCount(Long id,Long qid,Long uid){
+       Comment comment= commentMapper.selectByPrimaryKey(id);
+    Question question=questionMapper.selectByPrimaryKey(qid);
+        if(comment!=null&&comment.getCommentator()==uid){
+         return false;
+    }
+         commentEtxMapper.likeCountComment(comment);
+        return true;
+    }
 }

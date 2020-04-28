@@ -11,7 +11,8 @@ TYPE_NOT(2005,"评论类型错误或者不存在"),
     COMMENT_IS_EPTMY(2007,"回复内容不能为空"),
    READ_NOTIFY(2008,"读取错误"),
     NOTIFICATION_NOT_FOUND(2009, "通知不见了"),
-FILE_UPLOAD_FAIL(2010,"图片上传失败");
+FILE_UPLOAD_FAIL(2010,"图片上传失败"),
+    LIKE_FALSE(2011,"自己不能给自己点赞");
     private Integer code;
     private String message;
 

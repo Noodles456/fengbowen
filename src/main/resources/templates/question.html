@@ -76,7 +76,11 @@
                         </div>
 
                         <div class="menu">
-                            <span  class="glyphicon glyphicon-thumbs-up icon"></span>
+                            <button type="button"  class="glyphicon glyphicon-thumbs-up icon"  th:data-id="${comment.id}" th:data-qid="${question.id}" th:data-uid="${comment.user.id}" onclick="commentLike(this)">
+                            </button>
+                            <span th:text="${comment.likeCount}"></span>
+                            </span>
+
                             <span  class="glyphicon glyphicon-thumbs-down icon"></span>
                             <span >
                                 <span class="glyphicon glyphicon-comment icon"  th:data-id="${comment.id}" onclick="CollapseComment(this)">
