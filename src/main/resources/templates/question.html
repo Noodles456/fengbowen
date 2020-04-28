@@ -76,7 +76,7 @@
                         </div>
 
                         <div class="menu">
-                            <button type="button"  class="glyphicon glyphicon-thumbs-up icon like"  th:data-id="${comment.id}" th:data-qid="${question.id}" th:data-uid="${comment.user.id}" onclick="commentLike(this)">
+                            <button type="button"  class="glyphicon glyphicon-thumbs-up icon like"  th:data-id="${comment.id}" th:data-qid="${question.id}" th:data-uid="${session.user.id}" onclick="commentLike(this)">
                                 <span th:text="${comment.likeCount}"></span>
                             </button>
 
