@@ -12,6 +12,7 @@ import com.fbw.OneBoot.service.CommentService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,17 +56,17 @@ public ResultDTO comments(@PathVariable(name = "id") Long id){
 @ResponseBody
 @RequestMapping(value = "/like",method = RequestMethod.POST)
     public Object likeCount(@RequestBody LikeCountDTO likeCountDTO,
-                            HttpServletRequest request){
+                            HttpServletRequest request, Model model){
 
     User user=(User) request.getSession().getAttribute("user");
-    if(user==null){
+    if(user==null&&likeCountDTO.getUid()==0){
         return ResultDTO.errorOf(ErrorCodeImpl.NO_LOG);
     }
     Long id=likeCountDTO.getId();
     Long qid=likeCountDTO.getQid();
     Long uid=likeCountDTO.getUid();
     boolean bol = commentService.likeCount(id, qid, uid);
-if(bol){
+    if(bol){
     return ResultDTO.okOf();
 }
     return ResultDTO.errorOf(ErrorCodeImpl.LIKE_FALSE);

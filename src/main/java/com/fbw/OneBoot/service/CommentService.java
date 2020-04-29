@@ -117,7 +117,7 @@ private  void  createNotify(Comment comment, Long receiver, String notifyName, S
     Question question=questionMapper.selectByPrimaryKey(qid);
         if(comment!=null&&comment.getCommentator()==uid){
          return false;
-    }
+    } comment.setLikeCount(1L);
          commentEtxMapper.likeCountComment(comment);
         return true;
     }

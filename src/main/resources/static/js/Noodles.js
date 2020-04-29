@@ -130,7 +130,7 @@ function likeCount(id,qid,uid) {
         }),
         success: function (response) {
             if (response.code == 200) {
-                window.location.reload();
+                $("#likec").html("点赞成功")
             } else {
                 if (response.code == 2003) {
                     var isAccepted = confirm(response.messages);
@@ -150,6 +150,14 @@ function commentLike(e) {
     var id= e.getAttribute("data-id");
     var qid= e.getAttribute("data-qid");
     var uid= e.getAttribute("data-uid");
-    likeCount(id,qid,uid);
+    var collapse=e.getAttribute("data-collapse");
 
-}
+    if (collapse){
+       e.classList.remove("active");
+   }
+   else{
+       e.classList.add("active");
+        likeCount(id,qid,uid);
+   }
+   }
+
