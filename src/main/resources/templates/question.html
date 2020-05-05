@@ -52,7 +52,7 @@
                     <span class="glyphicon glyphicon-tag"   th:text="${tag}"></span>
                 </span>
                 <span>
-                            <button type="button"  class="glyphicon glyphicon-thumbs-up icon " th:text="${question.likeCount}" th:data-qid="${question.id}"  th:data-uid="${session.user!=null}?${session.user.id}:0"  onclick="questionLike(this)">
+                            <button type="button" id="likeQ"  class="glyphicon glyphicon-thumbs-up icon " th:text="${question.likeCount}" th:data-qid="${question.id}"  th:data-uid="${session.user!=null}?${session.user.id}:0"  onclick="questionLike(this)">
                             </button>
                             </span>
 

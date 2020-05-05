@@ -131,6 +131,7 @@ function likeCount(id,qid,uid) {
         success: function (response) {
             if (response.code == 200) {
                 $("#likec").html("点赞成功")
+                $("#likeQ").html("点赞成功")
             } else {
                 if (response.code == 2003) {
                     var isAccepted = confirm(response.messages);
