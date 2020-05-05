@@ -56,19 +56,22 @@ public ResultDTO comments(@PathVariable(name = "id") Long id){
 @ResponseBody
 @RequestMapping(value = "/like",method = RequestMethod.POST)
     public Object likeCount(@RequestBody LikeCountDTO likeCountDTO,
-                            HttpServletRequest request, Model model){
+                            HttpServletRequest request, Model model) {
 
-    User user=(User) request.getSession().getAttribute("user");
-    if(user==null&&likeCountDTO.getUid()==0){
+    User user = (User) request.getSession().getAttribute("user");
+    if (user == null && likeCountDTO.getUid() == 0) {
         return ResultDTO.errorOf(ErrorCodeImpl.NO_LOG);
     }
-    Long id=likeCountDTO.getId();
-    Long qid=likeCountDTO.getQid();
-    Long uid=likeCountDTO.getUid();
-    boolean bol = commentService.likeCount(id, qid, uid);
-    if(bol){
-    return ResultDTO.okOf();
-}
+
+        Long id = likeCountDTO.getId();
+        Long qid = likeCountDTO.getQid();
+        Long uid = likeCountDTO.getUid();
+        boolean bol = commentService.likeCount(id, qid, uid);
+
+        if (bol) {
+            return ResultDTO.okOf();
+        }
+
     return ResultDTO.errorOf(ErrorCodeImpl.LIKE_FALSE);
     }
 

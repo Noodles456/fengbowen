@@ -88,5 +88,10 @@
         </if>
       limit #{page},#{size}
     </select>
-
+    <update id="likeCountQuestion" parameterType="question">
+  update question
+    set
+    like_count =  like_count + #{likeCount,jdbcType=INTEGER}
+    where id=#{id}
+    </update>
 </mapper>

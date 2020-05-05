@@ -145,13 +145,23 @@ function likeCount(id,qid,uid) {
         },
         dataType: "json"
     });
-    }
+}
+   function questionLike(e){
+    var qid =e.getAttribute("data-qid");
+    var uid=e.getAttribute("data-uid");
+       var collapse=e.getAttribute("data-collapse");
+       if (collapse){
+           e.classList.remove("active");
+       }else{
+           e.classList.add("active");
+           likeCount(0,qid,uid);
+       }
+}
 function commentLike(e) {
     var id= e.getAttribute("data-id");
     var qid= e.getAttribute("data-qid");
     var uid= e.getAttribute("data-uid");
     var collapse=e.getAttribute("data-collapse");
-
     if (collapse){
        e.classList.remove("active");
    }

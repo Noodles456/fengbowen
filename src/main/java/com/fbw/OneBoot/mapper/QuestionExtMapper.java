@@ -18,5 +18,5 @@ public interface QuestionExtMapper {
     List<Question> selectBySearch(SearchDTO searchDTO);
 
 
-
+    void likeCountQuestion(Question question);
 }
